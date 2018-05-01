@@ -13,6 +13,10 @@
 
     window.addEventListener("load", startingGame);
     restartBtn.addEventListener("click", startingGame);
+    restartBtn.addEventListener("click", restartStars);
+
+
+
 
     // start and restarts game 
     function startingGame() {
@@ -40,7 +44,10 @@
     }
 
 
-
+function restartStars(){
+    for (i = 0; i < 3; i++) {removeStar()};
+    gimme3Stars();
+}
 
     function youWin(){
         // clearInterval(refreshIntervalId);   
