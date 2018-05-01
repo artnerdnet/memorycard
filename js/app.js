@@ -4,7 +4,7 @@
     let cards = document.getElementsByClassName('card');
     let allCards = [...cards];
     let openCard = [];
-    var allStars = document.querySelector(".stars");
+    let allStars = document.querySelector(".stars");
     let matchedCard = document.getElementsByClassName("match");
     const moves = document.querySelector('.moves');
     const deck = document.querySelector(".deck");
@@ -33,11 +33,11 @@
         e.target.removeEventListener(e.type, arguments.callee);
     let refreshIntervalId = setInterval(function() {
         if (gameStart == true) {
-            var currentTime = new Date().getTime();
-            var elapsed = currentTime - timeOfFirstClick;
-            var minutes = Math.floor(elapsed / 60000); // this claculates the number of minutes passed 
-            var remaining = elapsed - (minutes * 60000);
-            var seconds = Math.floor(remaining / 1000);
+            const currentTime = new Date().getTime();
+            const elapsed = currentTime - timeOfFirstClick;
+            const minutes = Math.floor(elapsed / 60000); // this claculates the number of minutes passed 
+            const remaining = elapsed - (minutes * 60000);
+            const seconds = Math.floor(remaining / 1000);
             timer.innerHTML =  minutes + " mins " + seconds + " secs";
         }
     }, 1000);
@@ -78,7 +78,7 @@ function restartStars(){
         this.className += ' show open';
         // 
         openCard.push(this);
-        var len = openCard.length;
+        const len = openCard.length;
         if (len === 2) {
             compareCards();
         }
@@ -91,8 +91,8 @@ function restartStars(){
     }
 
     function gimme3Stars() {
-        for (var i = 0; i < 3; i++) {
-            var li = document.createElement("li");
+        for ( i = 0; i < 3; i++) {
+            let li = document.createElement("li");
             li.setAttribute("class", "fa fa-star");
             allStars.appendChild(li);
             moves.innerText = allStars.children.length;
@@ -178,13 +178,13 @@ function restartStars(){
     }
 
     function shuffleThis() {
-        for (var j = 0; j < cards.length; j++) {
+        for (j = 0; j < cards.length; j++) {
             cards[j].classList.remove("open", "show", "match"); // * * * I added "match" too. * * *
         };
 
         allCards = shuffle(allCards);
         // remove all exisiting classes from each card
-        for (var i = 0; i < allCards.length; i++) {
+        for (i = 0; i < allCards.length; i++) {
             deck.innerHTML = "";
             for (const ca of allCards) {
                 deck.appendChild(ca);
