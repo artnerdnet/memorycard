@@ -3,9 +3,6 @@
 ## Challenge
 Match all the cards without losing all the stars! Try to make a better time than before.
 
-## How to Play
-Load this link in your browser https://artnerdnet.github.io/memorycard
-
 ## Instructions
 Start the game by clicking on a card.
 Try to find the pair! 
