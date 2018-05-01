@@ -1,6 +1,6 @@
-# memorycard
+## Memory Card Game
 
-Challenge
+#Challenge
 Match all the cards without losing all the stars! Try to make a better time than before.
 
 # How to Play
