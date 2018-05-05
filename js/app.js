@@ -15,36 +15,51 @@
    window.addEventListener("load", startingGame);
    restartBtn.addEventListener("click", startingGame);
    restartBtn.addEventListener("click", restartStars);
-
+   
+   (function(){
+    'use-strict';
+    
+    var myHandler = function() {
+        var click = 0;
+        return function() {
+            if(click === 0) {
+                 timeOfFirstClick = new Date().getTime(); // registers the timer
+            }
+            click++;
+        }
+    }();
+    
+    
+    deck.addEventListener('click', myHandler, false);
+})();
 
 
 
    // start and restarts game 
    function startingGame() {
        openCard = [];
-                  movesCount = 0;
-
-       shuffleThis(); //shufflecards
-       hideAndShow(); // hides and shows cards for a second
-       gameStart = true;  
-       timeOfFirstClick = new Date().getTime(); // registers the timer
+        movesCount = 0;
+        shuffleThis(); //shufflecards
+        hideAndShow(); // hides and shows cards for a second
+        gameStart = true;
    }
 
    deck.addEventListener("click", handler);
 
    function handler(e) { //removes the listener for the click in the deck after the first click so it won't restart the timer
-       e.target.removeEventListener(e.type, arguments.callee);
-   let refreshIntervalId = setInterval(function() {
-       if (gameStart == true) {
-           const currentTime = new Date().getTime();
-           const elapsed = currentTime - timeOfFirstClick;
-           const minutes = Math.floor(elapsed / 60000); // this claculates the number of minutes passed 
-           const remaining = elapsed - (minutes * 60000);
-           const seconds = Math.floor(remaining / 1000);
-           timer.innerHTML =  minutes + " mins " + seconds + " secs";
-       }
-   }, 1000);
-   }
+       e.target.removeEventListener(e.type, arguments.callee);   
+       myTimer = setInterval(function() {
+        if (gameStart == true) {
+            const currentTime = new Date().getTime();
+            const elapsed = currentTime - timeOfFirstClick;
+            const minutes = Math.floor(elapsed / 60000); // this claculates the number of minutes passed 
+            const remaining = elapsed - (minutes * 60000);
+            const seconds = Math.floor(remaining / 1000);
+            timer.innerHTML =  minutes + " mins " + seconds + " secs";
+        }
+    });
+    }
+
 
 
 function restartStars(){
@@ -54,7 +69,7 @@ function restartStars(){
 }
 
    function youWin(){
-       // clearInterval(refreshIntervalId);   
+      
        const finalTime = timer.innerHTML;
        const finalScore = movesCount.innerText;
        if (matchedCard.length == 16) {
@@ -190,7 +205,7 @@ function restartStars(){
        };
 
        allCards = shuffle(allCards);
-       // remove all exisiting classes from each card
+       // remove all existing classes from each card
        for (i = 0; i < allCards.length; i++) {
            deck.innerHTML = "";
            for (const ca of allCards) {
