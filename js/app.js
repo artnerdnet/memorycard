@@ -22,19 +22,19 @@
    // start and restarts game 
    function startingGame() {
        openCard = [];
-       movesCount = 0;
+                  movesCount = 0;
+
        shuffleThis(); //shufflecards
        hideAndShow(); // hides and shows cards for a second
        gameStart = true;  
        timeOfFirstClick = new Date().getTime(); // registers the timer
-       restartStars();
    }
 
    deck.addEventListener("click", handler);
 
    function handler(e) { //removes the listener for the click in the deck after the first click so it won't restart the timer
        e.target.removeEventListener(e.type, arguments.callee);
-       let refreshIntervalId = setInterval(function() {
+   let refreshIntervalId = setInterval(function() {
        if (gameStart == true) {
            const currentTime = new Date().getTime();
            const elapsed = currentTime - timeOfFirstClick;
