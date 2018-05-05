@@ -11,6 +11,7 @@
    const restartBtn = document.querySelector('.restart');
    let gameStart = false;
    let movesCount = 0;
+   finalScore = 0;
 
    window.addEventListener("load", startingGame);
    restartBtn.addEventListener("click", startingGame);
@@ -33,14 +34,18 @@ const TIME = document.getElementById('timer');
 const START = document.getElementById('restartBtn');
 let interval = null;
 let seconds = 0;
+let minutes = 0;
 
   
 
 function startTimer() {
   interval = setInterval(function() {
+      if (seconds == 60) {
+          minutes = Math.floor(seconds/60);
+          seconds = 0;
+      }
     seconds++;
-    TIME.innerHTML = seconds;
-    
+    TIME.innerHTML = minutes + ':' + seconds;
   }, 1000);
 }
 
@@ -48,6 +53,7 @@ function stopTimer() {
   clearInterval(interval);
   interval = null;
   seconds = 0;
+  minutes = 0;
 }
 
 
@@ -66,7 +72,7 @@ function restartStars(){
        const finalTime = timer.innerHTML;
        const finalScore = movesCount.innerText;
        if (matchedCard.length == 16) {
-        setTimeout(function() {alert('You win! Your start rating was ' + finalScore + ' stars and ' + movesCount + ' moves in '  + finalTime);
+        setTimeout(function() {alert('You win! Your start rating was ' + finalScore + ' stars and ' + movesCount + ' moves in '  + finalTime + ' seconds.');
         startingGame();
         for (i = 0; i < 3; i++) {removeStar();} // sets the stars and moves to 0
         gimme3Stars(); // sets the stars and moves to 3
