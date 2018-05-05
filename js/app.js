@@ -21,11 +21,13 @@
 
    // start and restarts game 
    function startingGame() {
-    
         openCard = [];
         movesCount = 0;
         shuffleThis(); //shufflecards
         hideAndShow(); // hides and shows cards for a second
+        if (!interval) {
+            startTimer();
+           }
    }
 
 
@@ -34,9 +36,7 @@ const TIME = document.getElementById('timer');
 const START = document.getElementById('restartBtn');
 let interval = null;
 let seconds = 0;
-let minutes = 0;
-
-  
+let minutes = 0;  
 
 function startTimer() {
   interval = setInterval(function() {
@@ -57,10 +57,6 @@ function stopTimer() {
 }
 
 
-
-
-
-
 function restartStars(){
    for (i = 0; i < 3; i++) {removeStar()};
    gimme3Stars();
@@ -68,17 +64,14 @@ function restartStars(){
 }
 
    function youWin(){
-
        const finalTime = timer.innerHTML;
        const finalScore = movesCount.innerText;
        if (matchedCard.length == 16) {
-        setTimeout(function() {alert('You win! Your start rating was ' + finalScore + ' stars and ' + movesCount + ' moves in '  + finalTime + ' seconds.');
+        setTimeout(function() {
         startingGame();
-        for (i = 0; i < 3; i++) {removeStar();} // sets the stars and moves to 0
-        gimme3Stars(); // sets the stars and moves to 3
+        restartStars()
        }, 500);
-        stopTimer();
-   }
+        stopTimer();   }
    }
 
 
@@ -87,10 +80,13 @@ function restartStars(){
            alert('You lost! Try again');
            hideCards();
            startingGame();
-           for (i = 0; i < 3; i++) {removeStar();}
            gimme3Stars(); // sets the stars and moves to 3
            stopTimer(); 
+           if (!interval) {
+            startTimer();
+           }
        }
+
    }
 
 
