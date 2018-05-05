@@ -15,50 +15,43 @@
    window.addEventListener("load", startingGame);
    restartBtn.addEventListener("click", startingGame);
    restartBtn.addEventListener("click", restartStars);
-   
-   (function(){
-    'use-strict';
-    
-    var myHandler = function() {
-        var click = 0;
-        return function() {
-            if(click === 0) {
-                 timeOfFirstClick = new Date().getTime(); // registers the timer
-            }
-            click++;
-        }
-    }();
-    
-    
-    deck.addEventListener('click', myHandler, false);
-})();
 
 
 
    // start and restarts game 
    function startingGame() {
-       openCard = [];
+    
+        openCard = [];
         movesCount = 0;
         shuffleThis(); //shufflecards
         hideAndShow(); // hides and shows cards for a second
-        gameStart = true;
    }
 
-   deck.addEventListener("click", handler);
 
-   function handler(e) { //removes the listener for the click in the deck after the first click so it won't restart the timer
-       e.target.removeEventListener(e.type, arguments.callee);   
-       myTimer = setInterval(function() {
-        if (gameStart == true) {
-            const currentTime = new Date().getTime();
-            const elapsed = currentTime - timeOfFirstClick;
-            const minutes = Math.floor(elapsed / 60000); // this claculates the number of minutes passed 
-            const remaining = elapsed - (minutes * 60000);
-            const seconds = Math.floor(remaining / 1000);
-            timer.innerHTML =  minutes + " mins " + seconds + " secs";
-        }
-    });
-    }
+
+const TIME = document.getElementById('timer');
+const START = document.getElementById('restartBtn');
+let interval = null;
+let seconds = 0;
+
+  
+
+function startTimer() {
+  interval = setInterval(function() {
+    seconds++;
+    TIME.innerHTML = seconds;
+    
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(interval);
+  interval = null;
+  seconds = 0;
+}
+
+
+
 
 
 
@@ -69,15 +62,16 @@ function restartStars(){
 }
 
    function youWin(){
-      
+
        const finalTime = timer.innerHTML;
        const finalScore = movesCount.innerText;
        if (matchedCard.length == 16) {
-           setTimeout(function() {alert('You win! Your start rating was ' + finalScore + ' stars and ' + movesCount + ' moves in '  + finalTime);
-           startingGame();
-           for (i = 0; i < 3; i++) {removeStar();} // sets the stars and moves to 0
-           gimme3Stars(); // sets the stars and moves to 3
-       }, 500);    
+        setTimeout(function() {alert('You win! Your start rating was ' + finalScore + ' stars and ' + movesCount + ' moves in '  + finalTime);
+        startingGame();
+        for (i = 0; i < 3; i++) {removeStar();} // sets the stars and moves to 0
+        gimme3Stars(); // sets the stars and moves to 3
+       }, 500);
+        stopTimer();
    }
    }
 
@@ -89,6 +83,7 @@ function restartStars(){
            startingGame();
            for (i = 0; i < 3; i++) {removeStar();}
            gimme3Stars(); // sets the stars and moves to 3
+           stopTimer(); 
        }
    }
 
@@ -166,6 +161,11 @@ function restartStars(){
    }
 
    function hideAndShow(){
+       stopTimer();
+    if (!interval) {
+        startTimer();
+       }
+    
        for (i = 0; i < allCards.length; i++) {
            allCards[i].classList.add('show', 'open');
        }
