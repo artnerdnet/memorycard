@@ -30,7 +30,7 @@
 <div id="openModal" class="modalDialog">
     <div>	<a href="#close" title="Close" class="close">X</a>
 
-        	<h2>Modal Box</h2>
+        	<h2>Instructions</h2>
 
         <p>Find the pair of every card in 10 moves or less.</p>
         <p>Get star rewards if you win with less than 3 moves!</p>
@@ -95,16 +95,27 @@
             </li>
         </ul>
     </div>
-<!-- The Modal -->
-<a href="#openModal">Instructions</a>
+<!-- The Win Modal -->
+<a href="#winModal">Win Modal</a>
 
-<div id="openModal" class="modalDialog">
+<div id="winModal" class="modalDialog">
     <div>	<a href="#close" title="Close" class="close">X</a>
 
         	<h2>Modal Box</h2>
 
-        <p>Find the pair of every card in 10 moves or less!</p>
-        <p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users.</p>
+        <p>Well done! Your start rating was <span id="starRating"></span> stars in <span id='timeRating'></span> and <span id='movesRating'></span> moves.</p>
+    </div>
+</div>
+<!-- end -->
+
+<!-- The Loose Modal -->
+<a href="#looseModal">Loose Modal</a>
+
+<div id="looseModal" class="modalDialog">
+    <div>	<a href="#close" title="Close" class="close">X</a>
+
+        	<h2>You loose! Try again.</h2>
+
     </div>
 </div>
 <!-- end -->
