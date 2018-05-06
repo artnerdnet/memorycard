@@ -92,7 +92,7 @@ function scoreData() {
 
 
    function youLost() {
-           if (movesCount == 3) {
+           if (movesCount == 25) {
            hideCards();
            for (i = 0; i < 3; i++) {removeStar();}
            gimme3Stars(); // sets the stars and moves to 3
