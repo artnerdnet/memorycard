@@ -63,6 +63,15 @@ function restartStars(){
    movesCount = 0;
 }
 
+function scoreData() {
+    const finalTime = timer.innerHTML;
+    const finalScore = movesCount.innerText;
+    finalStars = allStars.innerHTML;
+    document.getElementById('starRating').innerHTML = finalStars;
+    document.getElementById('timeRating').innerHTML = minutes + ':' + seconds;
+    document.getElementById('movesRating').innerHTML = movesCount;    
+}
+
    function youWin(){
         const finalTime = timer.innerHTML;
         const finalScore = movesCount.innerText;
@@ -72,6 +81,8 @@ function restartStars(){
         document.getElementById('movesRating').innerHTML = movesCount;    
        if (matchedCard.length == 16) {
         setTimeout(function() {
+        scoreData();
+        window.location.href = '#winModal';
         startingGame();
         for (i = 0; i < 3; i++) {removeStar();} // sets the stars and moves to 0
         gimme3Stars(); // sets the stars and moves to 3
@@ -83,10 +94,10 @@ function restartStars(){
    function youLost() {
            if (movesCount == 3) {
            hideCards();
-           startingGame();
            for (i = 0; i < 3; i++) {removeStar();}
            gimme3Stars(); // sets the stars and moves to 3
            stopTimer(); 
+           startingGame();
            window.location.href = '#looseModal';
        }
 
