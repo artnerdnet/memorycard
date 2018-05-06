@@ -11,12 +11,11 @@
    const restartBtn = document.querySelector('.restart');
    let gameStart = false;
    let movesCount = 0;
-   finalScore = 0;
+   let finalScore = 0;
 
    window.addEventListener("load", startingGame);
    restartBtn.addEventListener("click", startingGame);
    restartBtn.addEventListener("click", restartStars);
-
 
 
    // start and restarts game 
@@ -65,8 +64,12 @@ function restartStars(){
 }
 
    function youWin(){
-       const finalTime = timer.innerHTML;
-       const finalScore = movesCount.innerText;
+        const finalTime = timer.innerHTML;
+        const finalScore = movesCount.innerText;
+        finalStars = allStars.innerHTML;
+        document.getElementById('starRating').innerHTML = finalStars;
+        document.getElementById('timeRating').innerHTML = minutes + ':' + seconds;
+        document.getElementById('movesRating').innerHTML = movesCount;    
        if (matchedCard.length == 16) {
         setTimeout(function() {
         startingGame();
@@ -211,7 +214,6 @@ function restartStars(){
        }
 
    }
-
 
 
    /*
