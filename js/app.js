@@ -25,9 +25,10 @@
         movesCount = 0;
         shuffleThis(); //shufflecards
         hideAndShow(); // hides and shows cards for a second
-        if (!interval) {
-            startTimer();
-           }
+        stopTimer();
+    if (!interval) {
+        startTimer();
+       }
    }
 
 
@@ -69,22 +70,21 @@ function restartStars(){
        if (matchedCard.length == 16) {
         setTimeout(function() {
         startingGame();
-        restartStars()
+        for (i = 0; i < 3; i++) {removeStar();} // sets the stars and moves to 0
+        gimme3Stars(); // sets the stars and moves to 3
        }, 500);
         stopTimer();   }
    }
 
 
    function youLost() {
-           if (movesCount == 10) {
-           alert('You lost! Try again');
+           if (movesCount == 3) {
            hideCards();
            startingGame();
+           for (i = 0; i < 3; i++) {removeStar();}
            gimme3Stars(); // sets the stars and moves to 3
            stopTimer(); 
-           if (!interval) {
-            startTimer();
-           }
+           window.location.href = '#looseModal';
        }
 
    }
@@ -157,17 +157,12 @@ function restartStars(){
            setTimeout(function() {
                hideCards();
                openCard = [];
-               removeStar();
            }, 1000);
+           removeStar();
        };
    }
 
    function hideAndShow(){
-       stopTimer();
-    if (!interval) {
-        startTimer();
-       }
-    
        for (i = 0; i < allCards.length; i++) {
            allCards[i].classList.add('show', 'open');
        }
