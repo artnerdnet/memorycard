@@ -13,13 +13,11 @@
    let movesCount = 0;
    let finalScore = 0;
 
-   window.addEventListener("load", startingGame);
    restartBtn.addEventListener("click", startingGame);
-   restartBtn.addEventListener("click", restartStars);
-
 
    // start and restarts game 
-   function startingGame() {
+   function startingGame() { 
+       restartStars();
         openCard = [];
         movesCount = 0;
         shuffleThis(); //shufflecards
@@ -57,10 +55,10 @@ function stopTimer() {
 }
 
 
-function restartStars(){
-   for (i = 0; i < 3; i++) {removeStar()};
-   gimme3Stars();
-   movesCount = 0;
+function restartStars(){ debugger
+    allStars.innerHTML = "";
+    gimme3Stars();
+    movesCount = 0;
 }
 
 function scoreData() {
@@ -72,7 +70,7 @@ function scoreData() {
     document.getElementById('movesRating').innerHTML = movesCount;    
 }
 
-   function youWin(){
+   function youWin(){ 
         const finalTime = timer.innerHTML;
         const finalScore = movesCount.innerText;
         finalStars = allStars.innerHTML;
