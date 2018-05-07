@@ -99,7 +99,7 @@
 
 
     function youLost() {
-        if (movesCount == 20) {
+        if (movesCount == 30) {
             hideCards();
             for (i = 0; i < 3; i++) {
                 removeStar();
